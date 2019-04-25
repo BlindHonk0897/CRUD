@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>Mongo DB Activity</title>
+	<link rel="stylesheet" type="text/css" href="crudStyle.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#out').hide();
+
+			function getTime() {
+				var time = new Date();
+				return time.getHours() + ":" + time.getMinutes();
+			}
+
+			$("#register").on("click", function(){
+				var name = {name: $("#nameForm").val(), in: getTime()};
+				$.ajax({
+					type: "POST",
+					url: "/register",
+					data: name,
+					success: function(data){
+						alert (name.name + "added");
+						location.reload();
+					}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<center><table class="table table-bordered">
+			<tr>
+				<th>Entry Number</th>
+					
+				<th>Name</th>
+				
+				<th>Time In</th>
+
+				<th>Time Out</th>
+					<td><input type="button" value="Time Out" id="out"></td>
+			</tr>
+		</table>
+		<a href="register" class="linkbtn">Register New User</a>
+	</div></center>
+</body>
+</html>
