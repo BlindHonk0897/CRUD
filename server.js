@@ -39,10 +39,10 @@ app.post('/register',function(req,res){
 });
 
 app.post('/add',function(req,res){
-  console.log(req.body.name);
+  console.log(req.body.Name);
   var today = new Date();
   var toReg = {
-    'Name':req.body.name,
+    'Name':req.body.Name,
     'In':today.getHours()-12 +":"+today.getMinutes()
   }
   client.db('CrudDB').collection('CrudCollection').insertOne(toReg);
@@ -50,6 +50,16 @@ app.post('/add',function(req,res){
    // res.render(__dirname + '/public/views/index.ejs');
 });
 
+app.post('/out',(req,res)=>{
+   //console.log(req.body.Name);
+   var Name = req.body.Name; 
+   client.db('CrudDB').collection('CrudCollection').findOne({['Name']:Name},(err,result)=>{
+     console.log(result.Name);
+   });
+   
+  
+   res.send('Out post');
+});
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, res) => {
   assert.equal(null, err)

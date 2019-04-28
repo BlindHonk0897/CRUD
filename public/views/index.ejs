@@ -1,5 +1,6 @@
 <html>
 <head>
+<link rel="icon" type="image/png" href="../assets/img/pn-logo.png">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -16,16 +17,22 @@
 <th class="font-weight-bold">Time Out</th>
 </thead>
 
-     <% var data = result, count = 0 %> 
+     <% var data = result, count = 1 %> 
         <% data.forEach(function(element){ %>
             <tr>
-                <td><%= count+1 %></td> 
-                <td><%= element.Name %></td> 
-                <td><%= element.In %></td>
-                <td><button class="btn btn-info btn-sm" style="width: 40%;" id= <%= `${count}`%>>Out</button></td>
-                <td><button class="btn btn-success btn-sm" style="margin-left: -70%; width: 65%;">Edit</button></td>
-                <td><button class="btn btn-danger btn-sm" style="margin-left: -90%; width: 50%;">Delete</button></td>
-            </tr> 
+                <form method="POST" action="/out">
+                <td><%= count %></td> 
+                <td><input type="text" name="Name" style="border:none;background: transparent;" value= <%= `${element.Name}` %>></td> 
+                <td name = "In"><%= element.In %></td>
+                <td id="teddy"><% if(element.Out){ %>
+                               <%= element.Out %>
+                               <%}else{%>
+                                <button name="out" type="submit" class="btn btn-info btn-sm" style="width: 40%;" id= <%= `${count}`%>>Out</button></td>
+                               <%}%> 
+                <td><button class="btn btn-success btn-sm" style="margin-left: -70%; width: 65%;">Edit</button></td>     
+              </form>
+              <td><button class="btn btn-danger btn-sm" style="margin-left: -90%; width: 50%;">Delete</button></td>
+           </tr>
             <% count++ %>
         <% });%>   
 </table>
@@ -34,15 +41,15 @@
 </form>
 </div>
 <script type="text/javascript">
-  $(document).ready(function(){
-    var but = $('#0');
-    but.click(()=>{
-        alert('hehehe');
-    })
-    var but1 = $('#1');
-    but1.click(()=>{
-        alert('hehehe');
-    })
-  });
+//   $(document).ready(function(){
+//     var but = $('#0');
+//     but.click(()=>{
+//         alert('hehehe');
+//     })
+//     var but1 = $('#1');
+//     but1.click(()=>{
+//         alert('hehehe');
+//     })
+//   });
 </script>
 </body>
