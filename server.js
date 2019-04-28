@@ -62,21 +62,23 @@ app.post('/',(req,res)=>{
     }
     var id = result._id;
     client.db('CrudDB').collection('CrudCollection').updateOne({'_id':id},{$set:{'Out':hour +":"+min}})
+    client.db('CrudDB').collection('CrudCollection').find({}).toArray((err, docs) => {
+      assert.equal(null, err)
+      res.render(__dirname + '/public/views/index.ejs',{'result':docs});
+    })
    });
-   client.db('CrudDB').collection('CrudCollection').find({}).toArray((err, docs) => {
-    assert.equal(null, err)
-    res.render(__dirname + '/public/views/index.ejs',{'result':docs});
-  })
 });
 
 app.post('/edit',(req,res)=>{
- // console.log(req.body.Name);
-  var Name = req.body.Name; 
+ console.log(req.body.count);
+  var Name = req.body; 
   client.db('CrudDB').collection('CrudCollection').findOne({['Name']:Name},(err,result)=>{
-  var id = result._id;
+  var toEdit ={
+    '_id':"jeje"
+  }
     
   });
-  res.send('Edit post');
+  res.render(__dirname + '/public/views/edit.ejs');
 });
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, res) => {
