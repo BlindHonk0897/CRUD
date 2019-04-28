@@ -20,7 +20,7 @@
      <% var data = result, count = 1 %> 
         <% data.forEach(function(element){ %>
             <tr>
-                <form method="POST" action="/out">
+                <form method="POST" action="/">
                 <td><%= count %></td> 
                 <td><input type="text" name="Name" style="border:none;background: transparent;" value= <%= `${element.Name}` %>></td> 
                 <td name = "In"><%= element.In %></td>
@@ -29,7 +29,7 @@
                                <%}else{%>
                                 <button name="out" type="submit" class="btn btn-info btn-sm" style="width: 40%;" id= <%= `${count}`%>>Out</button></td>
                                <%}%> 
-                <td><button class="btn btn-success btn-sm" style="margin-left: -70%; width: 65%;">Edit</button></td>     
+                <td><button formmethod="POST" formaction="/edit" class="btn btn-success btn-sm" style="margin-left: -70%; width: 65%;">Edit</button></td>     
               </form>
               <td><button class="btn btn-danger btn-sm" style="margin-left: -90%; width: 50%;">Delete</button></td>
            </tr>

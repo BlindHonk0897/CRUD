@@ -50,22 +50,41 @@ app.post('/add',function(req,res){
    // res.render(__dirname + '/public/views/index.ejs');
 });
 
-app.post('/out',(req,res)=>{
+app.post('/',(req,res)=>{
    //console.log(req.body.Name);
    var Name = req.body.Name; 
    client.db('CrudDB').collection('CrudCollection').findOne({['Name']:Name},(err,result)=>{
-     console.log(result.Name);
+    var today = new Date();
+    var hour = today.getHours();
+    var min = today.getMinutes();
+    if(hour > 12){
+      hour = hour - 12;
+    }
+    var id = result._id;
+    client.db('CrudDB').collection('CrudCollection').updateOne({'_id':id},{$set:{'Out':hour +":"+min}})
    });
-   
-  
-   res.send('Out post');
+   client.db('CrudDB').collection('CrudCollection').find({}).toArray((err, docs) => {
+    assert.equal(null, err)
+    res.render(__dirname + '/public/views/index.ejs',{'result':docs});
+  })
+});
+
+app.post('/edit',(req,res)=>{
+ // console.log(req.body.Name);
+  var Name = req.body.Name; 
+  client.db('CrudDB').collection('CrudCollection').findOne({['Name']:Name},(err,result)=>{
+  var id = result._id;
+    
+  });
+  res.send('Edit post');
 });
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, res) => {
   assert.equal(null, err)
   client = res
   app.listen(port,()=>{console.log(`SERVER RUNNING AT PORT ${port}........`)});
-})
+});
+
 
 
 
