@@ -28,32 +28,10 @@ var  client = null;
 app.use(express.static(__dirname +'/public'));
 
 app.get('/',function(req,res){ 
-//   client.connect(err => {
-//     var all;
-//     const collection = client.db("CrudDB").collection("CrudCollection");
-//     collection.find({},function(err,result){
-//       all = result;
-//       all.forEach(element => {
-//           console.log(element.Name);
-//         });
-//     // });
-//     // var registrar = {
-//     //     'Entry_No':2,
-//     //     'Name':'Sample2',
-//     //     'In':'1:00'
-//     // }
-//     //  collection.insertOne(registrar);
-//     res.render(__dirname + '/public/views/index.ejs',{'result':result.urlencoded});
-//     client.close();
-    
-//   }); 
-  
-// });
-
-client.db('CrudDB').collection('CrudCollection').find({}).toArray((err, docs) => {
-  assert.equal(null, err)
-  res.render(__dirname + '/public/views/index.ejs',{'result':docs});
-})
+  client.db('CrudDB').collection('CrudCollection').find({}).toArray((err, docs) => {
+    assert.equal(null, err)
+    res.render(__dirname + '/public/views/index.ejs',{'result':docs});
+  })
 });
 
 app.post('/register',function(req,res){
@@ -61,7 +39,15 @@ app.post('/register',function(req,res){
 });
 
 app.post('/add',function(req,res){
-    res.render(__dirname + '/public/views/index.ejs');
+  console.log(req.body.name);
+  var today = new Date();
+  var toReg = {
+    'Name':req.body.name,
+    'In':today.getHours()-12 +":"+today.getMinutes()
+  }
+  client.db('CrudDB').collection('CrudCollection').insertOne(toReg);
+  res.send('registered');
+   // res.render(__dirname + '/public/views/index.ejs');
 });
 
 

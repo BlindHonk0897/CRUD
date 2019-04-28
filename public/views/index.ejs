@@ -15,34 +15,11 @@
 <th class="font-weight-bold">Time In</th>
 <th class="font-weight-bold">Time Out</th>
 </thead>
-<tr>
-<td>1</td>
-<td>Phil</td>
-<td>sample</td>
-<td><button class="btn btn-info btn-sm" style="width: 40%;">Out</button></td>
-<td><button class="btn btn-success btn-sm" style="margin-left: -70%; width: 65%;">Edit</button></td>
-<td><button class="btn btn-danger btn-sm" style="margin-left: -90%; width: 50%;">Delete</button></td>
-</tr>
-<tr>
-<td>2</td>
-<td>Danilo</td>
-<td>sample</td>
-<td><button class="btn btn-info btn-sm" style="width: 40%;">Out</button></td>
-<td><button class="btn btn-success btn-sm" style="margin-left: -70%; width: 65%;">Edit</button></td>
-<td><button class="btn btn-danger btn-sm" style="margin-left: -90%; width: 50%;">Delete</button></td>
-</tr>
-<tr>
-<td>3</td>
-<td>Winkle</td>
-<td>sample</td>
-<td><button class="btn btn-info btn-sm" style="width: 40%;">Out</button></td>
-<td><button class="btn btn-success btn-sm" style="margin-left: -70%; width: 65%;">Edit</button></td>
-<td><button class="btn btn-danger btn-sm" style="margin-left: -90%; width: 50%;">Delete</button></td>
-</tr>
+
      <% var data = result, count = 0 %> 
         <% data.forEach(function(element){ %>
             <tr>
-                <td><%= element.Entry_No %></td> 
+                <td><%= count+1 %></td> 
                 <td><%= element.Name %></td> 
                 <td><%= element.In %></td>
                 <td><button class="btn btn-info btn-sm" style="width: 40%;" id= <%= `${count}`%>>Out</button></td>
